@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import {toPng, toJpeg} from "html-to-image";
+import {toPng} from "html-to-image";
+import download from 'downloadjs';
 import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
@@ -22,12 +23,6 @@ class App extends React.Component {
         this.editorTextChange = this.editorTextChange.bind(this);
     }
 
-    editorDidSubmit(text) {
-        this.setState({
-            renderContent: text
-        });
-    }
-
     editorTextChange(text) {
         this.setState({
             renderContent: text
@@ -37,7 +32,7 @@ class App extends React.Component {
     didRenderPressed() {
         toPng(document.getElementById("render"))
             .then(function (dataUrl) {
-                console.log(dataUrl)
+                download(dataUrl, 'my-node.png');
             })
             .catch(function (error) {
                 console.error('oops, something went wrong!', error);
