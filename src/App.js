@@ -2,6 +2,11 @@ import React from 'react';
 import './App.css';
 
 import {toPng, toJpeg} from "html-to-image";
+import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
 
 import Editor from "./components/Editor";
 import Render from "./components/Render";
@@ -11,10 +16,10 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            renderContent: null
+            renderContent: ""
         };
 
-        this.editorDidSubmit = this.editorDidSubmit.bind(this);
+        this.editorTextChange = this.editorTextChange.bind(this);
     }
 
     editorDidSubmit(text) {
@@ -23,8 +28,14 @@ class App extends React.Component {
         });
     }
 
+    editorTextChange(text) {
+        this.setState({
+            renderContent: text
+        });
+    }
+
     didRenderPressed() {
-        toJpeg(document.getElementById("render"))
+        toPng(document.getElementById("render"))
             .then(function (dataUrl) {
                 console.log(dataUrl)
             })
@@ -34,15 +45,22 @@ class App extends React.Component {
     }
 
     render() {
+        const theme = createMuiTheme({
+            palette: {type: 'dark'},
+        });
+
         return (
-            <div>
-                <Editor editorDidSubmit={this.editorDidSubmit}/>
-                {this.state.renderContent==null ||
-                [
-                    <button onClick={this.didRenderPressed}>render</button>,
-                    <Render content={this.state.renderContent}/>,
-                ]}
-            </div>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <Container maxWidth="md">
+                    <Editor editorTextChange={this.editorTextChange}/>
+                    {this.state.renderContent === "" ||
+                    [
+                        <Button size="medium" type="submit" variant="outlined" onClick={this.didRenderPressed} style={{marginTop: 12, marginBottom: 12}}>render</Button>,
+                        <Render content={this.state.renderContent}/>,
+                    ]}
+                </Container>
+            </ThemeProvider>
         );
     }
 }

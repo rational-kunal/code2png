@@ -1,5 +1,11 @@
 import React from "react";
 
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+
 export default class Editor extends React.Component {
     constructor(props) {
         super(props);
@@ -7,28 +13,38 @@ export default class Editor extends React.Component {
         this.state = {textAreaValue: ""};
 
         this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
-        this.handleTextAreaSubmit = this.handleTextAreaSubmit.bind(this);
     }
 
     handleTextAreaChange(event) {
         this.setState({
             textAreaValue: event.target.value
         });
-    }
-
-    handleTextAreaSubmit(event) {
-        this.props.editorDidSubmit(this.state.textAreaValue);
-        event.preventDefault();
+        this.props.editorTextChange(event.target.value);
     }
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleTextAreaSubmit}>
-                    <textarea value={this.state.textAreaValue} onChange={this.handleTextAreaChange}/>
-                    <input type="submit"/>
-                </form>
-            </div>
+            <Card style={{marginTop: 12}}>
+                <CardContent>
+                    <Typography variant="h5" component="h2">
+                        code2png
+                    </Typography>
+
+                    <TextField
+                        fullWidth
+                        margin="normal"
+                        label="code"
+                        multiline
+                        rows={8}
+                        rowsMax={15}
+                        value={this.state.textAreaValue}
+                        onChange={this.handleTextAreaChange}
+                        variant="outlined"
+                    />
+
+                </CardContent>
+
+            </Card>
         )
     }
 }
