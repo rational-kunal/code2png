@@ -1,5 +1,6 @@
 {
     "name": "prettiercode",
+    "homepage":"https://rational-kunal.github.io/code2png/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
