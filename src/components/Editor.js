@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,21 +10,21 @@ export default class Editor extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {textAreaValue: ""};
+        this.state = { textAreaValue: '' };
 
         this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
     }
 
     handleTextAreaChange(event) {
         this.setState({
-            textAreaValue: event.target.value
+            textAreaValue: event.target.value,
         });
         this.props.editorTextChange(event.target.value);
     }
 
     render() {
         return (
-            <Card style={{marginTop: 12}}>
+            <Card style={{ marginTop: 12 }}>
                 <CardContent>
                     <Typography variant="h5" component="h2">
                         code2png
@@ -41,10 +41,8 @@ export default class Editor extends React.Component {
                         onChange={this.handleTextAreaChange}
                         variant="outlined"
                     />
-
                 </CardContent>
-
             </Card>
-        )
+        );
     }
 }
