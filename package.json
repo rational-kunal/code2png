@@ -1,6 +1,6 @@
 {
     "name": "prettiercode",
-    "homepage":"https://rational-kunal.github.io/code2png/",
+    "homepage": "https://rational-kunal.github.io/code2png/",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -20,9 +20,9 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test",
-        "eject": "react-scripts eject",,
+        "eject": "react-scripts eject",
         "predeploy": "npm run build",
-        "deploy" : "git subtree push --prefix dist origin gh-pages"
+        "deploy": "git subtree push --prefix dist origin gh-pages"
     },
     "eslintConfig": {
         "extends": "react-app"
