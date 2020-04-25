@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
